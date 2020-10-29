@@ -16,7 +16,7 @@ export default function Dashboard () {
                         <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
                             <i className="ti-menu ti-close" />
                         </a>
-                        <a className="navbar-brand" href="index.html">
+                        <a className="navbar-brand" href="javascript:void(0)">
                             <b className="logo-icon">
                                 <img src="/templates/src/assets/images/company-logo.png" alt="homepage" className="dark-logo" />
                                 <img src="/templates/src/assets/images/company-logo.png" alt="homepage" className="light-logo" />
