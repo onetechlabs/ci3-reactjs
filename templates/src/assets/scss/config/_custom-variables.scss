@@ -1,0 +1,155 @@
+// #############################
+// Theme Colors
+// #############################
+
+$themecolor: #009efb;
+$theme-light: #fff;
+$theme-dark: #212529;
+//$background-alt: #26c6da;
+
+$main-body-bg: #fff !default;
+
+// #############################
+// Skins For changing sidebar and logo bg colors
+// ############################# 
+$skin1: #06d79c;
+$skin2: #ef5350;
+$skin3: #398bf7;
+$skin4: #7460ee;
+$skin5: #1d2228;
+$skin6: #fff;
+
+// #############################
+// Shadow default
+// #############################
+
+$shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+
+// #############################
+// Transitions
+// #############################
+
+$transitions: 0.2s ease-in;
+$transparent-dark-bg:rgba(0, 0, 0, 0.05);
+
+// #############################
+// Preloader settings here
+// #############################
+$spinner-width: 64px;
+$spinner-height: 64px;
+$spinner-position: calc(50% - 3.5px);
+
+// #############################
+// Header settings here
+// #############################
+
+/// height-width setting
+$topbar:$theme-light;
+$topbar-height: 70px;
+$topbar-navlink-height: 70px;
+$mega-dd-height: 480px;
+$topbar-dropdown-width: 300px;
+$horizontal-navbar-brand-width: 230px;
+$stylish-sidebar-width: 280px;
+$mini-stylish-sidebar-width: 70px;
+$stylish-submenu-width: 210px;
+
+/// pading setting
+$topbar-navlink-padding: 0px 15px;
+$topbar-togglar-padding: 0 15px;
+$navbar-collapse-padding: 0px 10px 0 10px;
+$topbar-navbrand-padding: 0 10px;
+$minisidebar-topbar-navbrand-padding: 0px 20px 0px 20px;
+$horizontal-pagewrapper-padding-top-sm: 78px;
+$horizontal-pagewrapper-padding-top-lg: 125px;
+$horizontal-boxed-page-breadcrumb-padding-lg: 25px 0 0;
+$horizontal-boxed-page-breadcrumb-container-padding-lg: 20px 30px;
+
+/// font-size setting
+$topbar-navlink-font-size: 17px;
+$topbar-navlink-text-size: 14px;
+
+// #############################
+// Sidebar Settings here
+// #############################
+/// Text color setting
+$sidebar: $theme-light;
+$sidebar-alt: #e8eff0;
+$sidebar-text: #fff;
+$sidebar-icons: #fff;
+$sidebar-text-dark: #687384;
+$sidebar-icons-dark: #a6b7bf;
+
+/// font-size setting
+$sidebar-icon-size: 24px;
+$sidebar-first-level-icon-size: 14px;
+$sidebar-footer-text-size: 18px;
+$sidebar-link-font-size: 14px;
+$nav-small-cap-font-size: 12px;
+
+/// Line height setting
+$sidebar-link-line-height: 25px;
+$sidebar-icon-line-height: 25px;
+
+/// sidebar height-width setting
+$sidebar-width-full: 240px;
+$sidebar-width-iconbar:180px;
+$sidebar-width-mini: 65px;
+$sidebar-icon-width: 32px;
+$sidebarheight: 54px;
+$sidebar-li-width: 220px;
+$sidebar-first-level-width: 400px;
+
+/// sidebar links padding setting
+$sidebar-link-padding: 12px 15px;
+$rtl-sidebar-link-padding: 12px 15px;
+$minisidebar-link-padding: 14px 12px;
+$rtl-minisidebar-link-padding: 14px 12px;
+$sidebar-first-level-padding: 33px;
+$minisidebar-first-level-padding: 0 0 10px;
+$minisidebar-link-first-level-padding: 10px 12px;
+$sidebar-first-level-link-padding: 7px 35px 7px 15px;
+$rtl-minisidebar-link-first-level-padding: 10px 12px 10px 35px;
+$rtl-sidebar-first-level-link-padding: 7px 15px 7px 35px;
+$sidebar-footer-inner-padding: 15px;
+$sidebar-notibadge-inner-padding-x: 10px;
+$nav-cap-padding: 14px 14px 14px 20px;
+$nav-cap-padding-rtl: 14px 20px 14px 14px;
+$minisidebar-nav-cap-padding: 14px 14px 14px 14px;
+$stylish-link-padding: 15px 0px 14px;
+$stylish-first-lvl-link-padding: 10px 21px;
+
+/// User Profile img setting
+$profile-pic-width-full: 50px;
+$profile-pic-width-mini: 35px;
+
+/// box shadow setting
+$horizontal-list-shadow: 5px 10px 20px rgba(0, 0, 0, 0.1);
+
+// #############################
+// Page Layout Settings
+// #############################
+
+$boxed-width: 1200px; // boxed layout width
+$page-wrapper-container-padding: 25px;
+$container-min-height: calc(100vh - 130px);
+$footer-padding: 17px 15px;
+$lft: left;
+$rgt: right;
+
+
+// #############################
+// Sticky Left & Right Sidebar
+// #############################
+$left-part-width:260px;
+$right-part-width: calc(100% - 260px);
+$right-part-height: calc(100vh - 129px);
+
+$font-weight-medium: 500;
+
+// #############################
+// Card Setting
+// #############################
+$card-margin-bottom: 30px;
+$card-title-bottom: 10px;
+$card-subtitle-bottom: 10px;

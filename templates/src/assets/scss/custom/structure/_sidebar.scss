@@ -1,0 +1,219 @@
+// 
+//  Sidebar
+// 
+.left-sidebar {
+	position: absolute;
+	width: $sidebar-width-full;
+	height: 100%;
+	top: 0;
+	padding-top: $topbar-height;
+	z-index: 10;
+	background: $sidebar;
+	box-shadow: $shadow;
+	transition: 0.2s ease-in;
+}
+
+// 
+// Scroll Sidebar
+// 
+.scroll-sidebar {
+	position: relative;
+	height: calc(100% - 20px);
+}
+
+.sidebar-nav .user-profile {
+	margin-bottom: 15px !important;
+  	padding: 10px;
+  	border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+  	> .sidebar-link {
+		padding: 12px 8px !important;   
+	  	img {
+		  	width: 30px;
+		  	border-radius: 100%;
+		  	margin-right: 10px;
+	  	}
+  	}
+  	.first-level {
+  		padding-left: 48px !important;
+	  	li {
+			margin-top: 8px;
+	  	}
+  	}
+}
+
+.sidebar-nav {
+	>ul>.sidebar-item>.sidebar-link.active {
+		// box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		// background-color: $dark;
+		color: $white;
+		opacity: 1;
+		font-weight: 400;
+	}
+	ul {
+		padding: 0;
+	   	.sidebar-item {
+			width: 100%;
+			margin-bottom: 5px;
+		   	.sidebar-link {
+				padding: $sidebar-link-padding;
+				display: flex;
+				border-radius: 4px;
+				white-space: nowrap;
+				align-items:center;
+				position: relative;
+				line-height: $sidebar-link-line-height;
+				font-size: $sidebar-link-font-size;
+				opacity: 0.6;
+				color: $sidebar-text;
+				.side-badge.badge {
+					position: absolute;
+					right: 32px;
+					top: 17px;
+					padding: 3px 10px;
+					border-radius: 4px; 
+				}
+				.feather {
+                    height: 18px;
+                    width: 18px;
+                    margin: 0 8px 0 5px;
+                    fill: rgba(0,158,251,0.1);
+                    color: $sidebar-icons;
+                }
+				i {
+					font-style: normal;
+					line-height: $sidebar-icon-line-height;
+					font-size: $sidebar-icon-size;
+					color: $sidebar-icons;
+					text-align: center;
+					width: $sidebar-icon-width;
+					display: inline-block;
+				}
+				.hide-menu {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					margin-left: 4px;
+				}
+
+				// Active and Hover State
+				// ################################################
+				&.active,
+				&:hover {
+					opacity: 1;
+					.feather {
+                        color: $white;
+                    }
+				}
+				&.active {
+					font-weight: 500;
+				}
+			}
+
+			// Selected nav link style here
+			// ################################################
+		   &.selected > .sidebar-link{
+				
+				color: $white;
+				opacity: 1;
+			   /*background: rgba(0, 0, 0, 0.04);*/ //For set the background of the links
+		   }
+
+		   // First Level link here
+		   // ################################################
+		   .first-level {
+				padding-left: $sidebar-first-level-padding;
+				.sidebar-item {
+					margin-bottom: 0;
+				}
+			   .sidebar-item.active .sidebar-link{
+					opacity: 1;
+			   }
+				.sidebar-item .sidebar-link {
+					padding: $sidebar-first-level-link-padding;
+					i {
+						display: none;
+						font-size: $sidebar-first-level-icon-size;
+					}
+				}
+			}
+		}
+
+		// Small Cap
+		// ################################################
+		.nav-small-cap {
+			font-size: $nav-small-cap-font-size;
+			line-height: 30px;
+			color: $sidebar-text;
+			opacity: 0.4;
+			text-transform: uppercase;
+			padding: $nav-cap-padding;
+			display: flex;
+			align-items: center;
+			white-space: nowrap;
+			font-weight: 500;
+				i {
+					line-height: 30px;
+					margin: 0 5px;
+					display: none;
+				}
+		}
+		.nav-devider {
+			background: rgba(255,255,255,.1);
+			height: 1px;
+			margin: 14px 0;
+			display: block;
+		}
+	}
+
+	// Hover State of links
+	// ################################################
+	>#sidebarnav >.sidebar-item >.sidebar-link:hover{
+		/*background: rgba(0, 0, 0, 0.04);*/
+	}
+}
+
+// 
+// Remove unnecessary margin-padding
+// 
+.sidebar-nav{
+	ul {
+		margin: 0;
+		li {
+			list-style: none;
+		}
+	}
+}
+.collapse.in {
+	display: block;
+}
+
+// 
+// Down arrow
+// 
+.sidebar-nav .has-arrow {
+	position: relative;
+	&::after {
+		position: absolute;
+		content: '';
+		width: 7px;
+		height: 7px;
+		margin-left: 10px;
+		top: 26px;
+		right: 15px;
+		border-width: 1px 0 0  1px;
+		border-style: solid;
+		border-color: $sidebar-text;
+		@extend %sidebar_arrow_transform;
+	}
+}
+
+// Active state of sidebar down arrow
+// ################################################
+/*.sidebar-nav .active > .has-arrow::after,*/
+/*.sidebar-nav li.selected > .has-arrow::after,*/
+.sidebar-nav li.active > .has-arrow::after,
+.sidebar-nav li > .has-arrow.active::after,
+.sidebar-nav .has-arrow[aria-expanded="true"]::after {
+	@extend %sidebar_arrow_active_transform;
+}
+

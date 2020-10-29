@@ -1,0 +1,234 @@
+/************side-mini-panel************/
+
+.side-mini-panel {
+	position: fixed;
+	left: 0px;
+	width: $mini-stylish-sidebar-width;
+	height: 100%;
+	background: $sidebar;
+	top: $topbar-height;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	z-index: 8;
+	.inner-toggle {
+		color: $sidebar-text;
+	}
+	ul.mini-nav {
+		margin: 0px;
+		padding: 0px 0 80px 0;
+		display: inline-block;
+		height: 100%;
+		>li {
+			>a {
+				padding: $stylish-link-padding;
+				display: block;
+				width: $mini-stylish-sidebar-width;
+				font-size: 18px;
+				text-align: center;
+				color: $sidebar-text;
+				opacity: 0.5;
+				.feather {
+                    height: 18px;
+                    width: 18px;
+                    margin: 0 8px 0 5px;
+                    fill: rgba(0,158,251,0.1);
+                    color: $sidebar-icons;
+                }
+				i {
+					width: 31px;
+					font-size: 24px;
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
+			&.selected>a {
+				background: $sidebar;
+				opacity: 1;
+				// i {
+				// 	color: $dark;
+				// }
+			}
+			.sidebarmenu {
+				padding: 0px;
+				position: absolute;
+				height: 100%;
+				width: $stylish-submenu-width;
+				background: $sidebar;
+				top: 0px;
+				box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.05);
+				left: $mini-stylish-sidebar-width;
+				display: none;
+			}
+			&.selected h3 {
+				color: $sidebar-text;
+			}
+			&.selected .sidebarmenu {
+				display: block;
+			}
+			&.selected.cnt-none .sidebarmenu {
+				display: none;
+			}
+		}
+	}
+	.sidebar-menu {
+		list-style: none;
+		margin: 0px;
+		padding: 0px 0 250px 0;
+		height: 100%;
+		position: relative;
+		>li {
+			position: relative;
+			margin: 0;
+			padding: 0;
+			display: block;
+			&.active>a {
+				color: $white;
+				opacity: 1;
+			}
+		}
+		>li>a {
+			padding: $stylish-first-lvl-link-padding;
+			display: block;
+			font-size: 14px;
+			font-weight: 400;
+			color: $sidebar-text;
+			opacity: 0.5;
+			&:hover {
+				color: $sidebar-text;
+				opacity: 1;
+			}
+		}
+	}
+}
+
+/************New sidebar menu************/
+
+
+/************This is for submenu************/
+
+.menu-title {
+	padding: 12px 21px;
+	display: block;
+	margin: 0px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 40px;
+}
+
+
+/************This is for submenu************/
+
+.sidebar-menu li.active .sub-menu.in {
+	display: block;
+}
+
+.sidebar-menu .sub-menu>li>a {
+	color: $sidebar-text;
+	&:hover,
+	&.active {
+		color: $white;
+	}
+}
+
+.sidebar-menu>li>.sub-menu {
+	margin: 0;
+}
+
+.sidebar-menu li>a>.fa-angle-left {
+	width: auto;
+	height: auto;
+	padding: 0;
+	margin-top: 3px;
+}
+
+.sidebar-menu li>a>.mdi-chevron-left {
+	-webkit-transform: rotate(180deg) translate(-85%, -95%);
+	-ms-transform: rotate(180deg) translate(-85%, -95%);
+	-o-transform: rotate(180deg) translate(-85%, -95%);
+	transform: rotate(180deg) translate(-85%, -95%);
+	-webkit-transform-origin: top;
+	-ms-transform-origin: top;
+	-o-transform-origin: top;
+	transform-origin: top;
+	-webkit-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+}
+
+.sidebar-menu li.active>a>.mdi-chevron-left {
+	-webkit-transform: rotate(270deg) translate(-80%, 0);
+	-ms-transform: rotate(270deg) translate(-80%, 0);
+	-o-transform: rotate(270deg) translate(-80%, 0);
+	transform: rotate(270deg) translate(-80%, 0);
+}
+
+.sidebar-menu .sub-menu {
+	position: relative;
+	display: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar-menu .sub-menu>li {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.sidebar-menu .sub-menu>li>a {
+	padding: 12px 30px;
+	display: block;
+	font-size: 14px;
+}
+
+
+/************This is for toggle************/
+
+.rmv-sidebarmenu #togglebtn {
+	display: none!important;
+}
+
+.togglediv {
+	position: absolute;
+	left: 245px;
+	top: 17px;
+	z-index: 10;
+}
+
+.togglediv #togglebtn i {
+	font-size: 16px;
+	color: $body-color;
+	margin-top: 5px;
+}
+
+// 
+// Responsive Mobile view
+// 
+
+@media(max-width:767px) {
+	.mini-sidebar {
+		.side-mini-panel {
+			left: -280px;
+		}
+		&.show-sidebar {
+			.side-mini-panel {
+				left: 0px;
+			}
+		}
+		.side-mini-panel ul.mini-nav > li.selected.cnt-none .sidebarmenu {
+			display: block;
+		}
+	}
+}
+
+.mini-nav {
+	.ps-scrollbar-y-rail {
+		left:3px !important;
+	}
+	.sidebar-menu {
+		.ps-scrollbar-y-rail {
+			left: auto !important;
+		}
+	}
+}
+

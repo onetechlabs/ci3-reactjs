@@ -1,0 +1,124 @@
+#main-wrapper {
+	&[data-layout="vertical"][data-sidebartype="stylish-menu"] {
+		.side-mini-panel {
+			&[data-stylishsidebarbg="skin1"] {
+				background: $skin1;
+				ul.mini-nav {
+					>li {
+						.sidebarmenu {
+							background: #18e2a9;
+						}
+						&.selected {
+							>a {
+								background: #18e2a9;
+							}
+						}
+					}
+				}
+			}
+			&[data-stylishsidebarbg="skin2"] {
+				background: $skin2;
+				ul.mini-nav {
+					>li {
+						.sidebarmenu {
+							background: #e86764;
+						}
+						&.selected {
+							>a {
+								background: #e86764;
+							}
+						}
+					}
+				}
+			}
+			&[data-stylishsidebarbg="skin3"] {
+				background: $skin3;
+				ul.mini-nav {
+					>li {
+						.sidebarmenu {
+							background: #5198f7;
+						}
+						&.selected {
+							>a {
+								background: #5198f7;
+							}
+						}
+					}
+				}
+			}
+			&[data-stylishsidebarbg="skin4"] {
+				background: $skin4;
+				ul.mini-nav {
+					>li {
+						.sidebarmenu {
+							background: #8072d8;
+						}
+						&.selected {
+							>a {
+								background: #8072d8;
+							}
+						}
+					}
+				}
+			}
+			&[data-stylishsidebarbg="skin5"] {
+				background: $skin5;
+				ul.mini-nav {
+					>li {
+						.sidebarmenu {
+							background: #262d34;
+						}
+						&.selected {
+							>a {
+								background: #262d34;
+							}
+						}
+					}
+				}
+			}
+			&[data-stylishsidebarbg="skin6"] {
+				background: $skin6;
+				.inner-toggle {
+					color: $sidebar-text-dark;
+				}
+				ul.mini-nav {
+					>li {
+						>a {
+							color: $sidebar-text-dark;
+							.feather {
+								color: $sidebar-text-dark;
+							}
+							&:hover {
+								color: $info;
+								opacity: 1;
+								.feather {
+									color: $info;
+								}
+							}
+						}
+						.sidebarmenu {
+							background: #f4f6f9;
+						}
+						&.selected {
+							>a {
+								color: $info;
+								background: #f4f6f9;
+								.feather {
+									color: $info;
+								}
+							}
+							h3 {
+								color: $sidebar-text-dark;
+							}
+						}
+					}
+				}
+				.sidebar-menu {
+					>li>a {
+						color: $sidebar-text-dark;
+					}
+				}
+			}
+		}
+	}
+}

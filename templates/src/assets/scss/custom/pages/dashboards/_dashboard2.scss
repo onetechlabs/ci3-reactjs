@@ -1,0 +1,41 @@
+#sales-overview2{
+    .ct-point{
+        stroke-width:6px;
+        stroke:$info; 
+    }
+    .ct-grid{
+        stroke-dasharray:0px;
+        stroke: rgba(0,0,0,.1);
+    }
+    .ct-area{
+        fill-opacity:0;
+    }
+    .ct-line{
+        stroke-width:3px;
+        stroke:$info;
+    }
+}
+
+.stats-bar {
+    .active {
+        background-color: rgba(0,0,0,.1);
+    }
+}
+
+.contact-widget {
+    .user-img {
+        width: 50px !important;
+        .profile-status {
+            left: 36px !important;
+        }
+    }
+}
+
+// 
+// Blog image responsive
+// 
+@include media-breakpoint-up(lg) {
+    .blog-img2 {
+        max-height: 293px;
+    }
+}

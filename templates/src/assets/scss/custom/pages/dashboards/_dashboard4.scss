@@ -1,0 +1,37 @@
+#ct-sales3-chart{
+    .ct-series-a {
+        .ct-bar {
+            stroke: rgba(57, 139, 247, 1);
+        }
+    }
+    .ct-series-b {
+        .ct-bar {
+            stroke: rgba(57, 139, 247, 0.8);
+        }
+    }
+    .ct-series-c {
+        .ct-bar {
+            stroke: rgba(57, 139, 247, 0.4);
+        }
+    }
+}
+/*******************
+ Sales overview Chart 2
+*******************/
+#sales-overview2{
+    .ct-point{
+        stroke-width:6px;
+        stroke:$info; 
+    }
+    .ct-grid{
+        stroke-dasharray:0px;
+        stroke: rgba(0,0,0,.1);
+    }
+    .ct-area{
+        fill-opacity:0;
+    }
+    .ct-line{
+        stroke-width:3px;
+        stroke:$info;
+    }
+}
