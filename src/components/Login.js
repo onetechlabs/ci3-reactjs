@@ -1,22 +1,22 @@
 import React from 'react'
-//import { BASE_URL } from '../util/constants'
+import PreReload from '../util/prereload'
+import { TEMPLATES_ASSETS } from '../util/constants'
 
 export default function Login () {
     return (
         <div>
-            <div className="preloader">
-                <div className="lds-ripple">
-                    <div className="lds-pos" />
-                    <div className="lds-pos" /></div>
-            </div>
-            <div className="auth-wrapper d-flex no-block justify-content-center align-items-center" style={{background: 'url(/templates/src/assets/images/background/login-register.jpg) no-repeat center center', backgroundSize: 'cover'}}>
+            {/* Loading Component */}
+            <PreReload></PreReload>
+            {/* Loading Component */}
+            {/* Container Page */}
+            <div className="auth-wrapper d-flex no-block justify-content-center align-items-center" style={{background: 'url('+TEMPLATES_ASSETS+'images/background/login-register.jpg) no-repeat center center', backgroundSize: 'cover'}}>
                 <div className="auth-box on-sidebar p-4 bg-white m-0">
                     <div id="loginform">
                         <div className="logo text-center">
                             <span className="db">
-                                <img src="/templates/src/assets/images/company-logo.png"/>
+                                <img src={TEMPLATES_ASSETS+"images/company-logo.png"}/>
                                 <br />
-                                <img src="/templates/src/assets/images/main-logo-text.png"/>
+                                <img src={TEMPLATES_ASSETS+"images/main-logo-text.png"}/>
                             </span>
                         </div>
                         <div className="row">
@@ -43,6 +43,7 @@ export default function Login () {
                     </div>
                 </div>
             </div>
+            {/* End Container Page */}
         </div>
     );
 }
