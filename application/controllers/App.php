@@ -6,9 +6,12 @@ class App extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->helper('url');
-		$this->load->helper('util');
+	}
+
+	public function load_variables(){
+		$this->load->model("Variable");
+		$data['variables'] = $this->Variable->loadVariableApplication();
+		echo json_encode($data);
 	}
 
 

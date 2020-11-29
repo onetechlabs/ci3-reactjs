@@ -1,6 +1,66 @@
 import React, { Component } from 'react';
-import { TEMPLATES_ASSETS } from '../util/constants'
+import { firebaseRestAPI, TEMPLATES_ASSETS, firebaseConfig, BASE_URL } from '../util/constants'
+/* Init Firebase */
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
+import "firebase/analytics";
+import moment from 'moment';
+export const auth = firebase.auth();
+export const firestoreDB = firebase.firestore();
+export const firestoreStorage = firebase.storage();
+firebase.analytics();
+/* End Init Firebase */
 export default class Header extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            avatar_url:sessionStorage.getItem("avatar_url"),
+            display_name:sessionStorage.getItem("display_name"),
+            email:sessionStorage.getItem("email"),
+            role:sessionStorage.getItem("role"),
+            unique_code:sessionStorage.getItem("unique_code"),
+        }
+    }
+    componentDidMount(){
+        var dateNow=new Date();
+        var dateToString=moment(dateNow).format("YYYY-MM-DD");
+        var html_no_notif = '<li><div class="border-bottom rounded-top py-3 px-4"><div class="mb-0 font-weight-medium font-16">Todays Notifications</div></div></li>'+
+        '<li>'+
+            '<div style="padding: 15px;border-bottom: 1px #F2F2F2 solid;">'+
+                '<div class="d-inline-block v-middle pl-2">'+
+                    '<center>No Notification Today</center>'
+                '</div>'+
+            '</div>'+
+        '</li>';
+        var notifCount=0;
+        firestoreDB.collection("notifications").orderBy('created_time','desc').limit(5)
+        .onSnapshot(function(snapshot) {
+            notifCount=0;
+            var html_notif='<li><div class="border-bottom rounded-top py-3 px-4"><div class="mb-0 font-weight-medium font-16">Todays Notifications</div></div></li>';
+            $("#notifications").html('');
+            snapshot.forEach((snap) => {
+                if(snap.data().created_at==dateToString){
+                    notifCount++;
+                    html_notif += '<li>'+
+                        '<div style="padding: 15px;border-bottom: 1px #F2F2F2 solid;">'+
+                            '<div>'+
+                                '<div style="width:100%;margin-bottom:2px;">'+snap.data().message+'</div><small style="width:100%; text-align:right; display:inline-block;font-size:9px;">'+moment(snap.data().created_at, "YYYY-MM-DD").format("DD MMMM YYYY")+" "+snap.data().created_time+'</small>'
+                            '</div>'+
+                        '</div>'+
+                    '</li>';
+                    console.log(snap.data());
+                }
+            });
+            $("#notifications").html(html_notif);
+            setInterval(()=>{
+                if(notifCount==0){
+                    $("#notifications").html(html_no_notif);
+                }
+            },2000);
+        });
+    }
     render() {
         return (
             <header className="topbar">
@@ -9,15 +69,12 @@ export default class Header extends Component {
                         <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
                             <i className="ti-menu ti-close" />
                         </a>
-                        <a className="navbar-brand" href="javascript:void(0)">
+                        <a className="navbar-brand" href="javascript:void(0)" id="dashboard">
                             <b className="logo-icon">
-                                <img src={TEMPLATES_ASSETS+"images/company-logo.png"} alt="homepage" className="dark-logo" />
-                                <img src={TEMPLATES_ASSETS+"images/company-logo.png"} alt="homepage" className="light-logo" />
+                                <b className="dashboardBeforeLogo">Dashboard</b>
+                                <div style={{clear:"both"}}></div>
+                                <img src={TEMPLATES_ASSETS+"images/company-logo.png"} width="100" alt="homepage" className="dark-logo" />
                             </b>
-                            <span className="logo-text">
-                                <img src={TEMPLATES_ASSETS+"images/main-logo-text.png"} alt="homepage" className="dark-logo" />
-                                <img src={TEMPLATES_ASSETS+"images/main-logo-light-text.png"} className="light-logo" alt="homepage" />
-                            </span>
                         </a>
                         <a className="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <i className="ti-more" />
@@ -27,79 +84,12 @@ export default class Header extends Component {
                         <ul className="navbar-nav mr-auto float-left">
                             <li className="nav-item">
                                 <a className="nav-link sidebartoggler d-none d-md-block waves-effect waves-dark" href="javascript:void(0)">
-                                    <i className="ti-menu" />
+                                    <img src={TEMPLATES_ASSETS+"images/menu.png"} alt="menu" className="menuIcon" />
                                 </a>
                             </li>
                         </ul>
+                        {this.state.role == "AdminCT" ?
                         <ul className="navbar-nav float-right">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i className="mdi mdi-message" />
-                                    <div className="notify">
-                                        <span className="heartbit" />
-                                        <span className="point" />
-                                    </div>
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
-                                    <ul className="list-style-none">
-                                        <li>
-                                            <div className="border-bottom rounded-top py-3 px-4">
-                                                <div className="mb-0 font-weight-medium font-16">Notifications</div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="message-center notifications position-relative" style={{height: '250px'}}>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="btn btn-danger rounded-circle btn-circle">
-                                                        <i className="fa fa-link" />
-                                                    </span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Luanch Admin</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">Just see the my new admin!</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:30 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="btn btn-success rounded-circle btn-circle">
-                                                        <i className="ti-calendar" />
-                                                    </span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Event today</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">Just a reminder that you have event</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:10 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="btn btn-info rounded-circle btn-circle">
-                                                        <i className="ti-settings" />
-                                                    </span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Settings</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">You can customize this template as you want</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:08 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="btn btn-primary rounded-circle btn-circle">
-                                                        <i className="ti-user" />
-                                                    </span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Pavan kumar</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">Just see the my admin!</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:02 AM</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a className="nav-link border-top text-center text-dark pt-3" href="javascript:void(0);">
-                                                <strong>Check all notifications</strong>
-                                                <i className="fa fa-angle-right" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0);" id={2} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="mdi mdi-email" />
@@ -108,136 +98,18 @@ export default class Header extends Component {
                                         <span className="point" />
                                     </div>
                                 </a>
-                                <div className="dropdown-menu mailbox dropdown-menu-right animated bounceInDown" aria-labelledby={2}>
-                                    <ul className="list-style-none">
+                                <div className="dropdown-menu mailbox dropdown-menu-right animated bounceInDown" style={{paddingBottom: 0}} aria-labelledby={2}>
+                                    <ul className="list-style-none" id="notifications">
                                         <li>
                                             <div className="border-bottom rounded-top py-3 px-4">
-                                                <div className="mb-0 font-weight-medium font-16">You have 4 new messages</div>
+                                                <div className="mb-0 font-weight-medium font-16">Today's Notifications</div>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div className="message-center message-body position-relative" style={{height: '250px'}}>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="user-img position-relative d-inline-block">
-                                                        <img src={TEMPLATES_ASSETS+"images/users/1.jpg"} alt="user" className="rounded-circle w-100" />
-                                                        <span className="profile-status rounded-circle online" /></span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Pavan kumar</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">Just see the my admin!</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:30 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="user-img position-relative d-inline-block">
-                                                        <img src={TEMPLATES_ASSETS+"images/users/2.jpg"} alt="user" className="rounded-circle w-100" />
-                                                        <span className="profile-status rounded-circle busy" /></span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Sonu Nigam</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">I've sung a song! See you at</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:10 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="user-img position-relative d-inline-block">
-                                                        <img src={TEMPLATES_ASSETS+"images/users/3.jpg"} alt="user" className="rounded-circle w-100" />
-                                                        <span className="profile-status rounded-circle away" /></span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Arijit Sinh</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">I am a singer!</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:08 AM</span>
-                                                    </div>
-                                                </a>
-                                                <a href="javascript:void(0)" className="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                    <span className="user-img position-relative d-inline-block">
-                                                        <img src={TEMPLATES_ASSETS+"images/users/4.jpg"} alt="user" className="rounded-circle w-100" />
-                                                        <span className="profile-status rounded-circle offline" /></span>
-                                                    <div className="w-75 d-inline-block v-middle pl-2">
-                                                        <h5 className="message-title mb-0 mt-1">Pavan kumar</h5>
-                                                        <span className="font-12 text-nowrap d-block time text-truncate">Just see the my admin!</span>
-                                                        <span className="font-12 text-nowrap d-block subtext">9:02 AM</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a className="nav-link border-top text-center text-dark pt-3" href="javascript:void(0);">
-                                                <b>See all e-Mails</b>
-                                                <i className="fa fa-angle-right" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i className="flag-icon flag-icon-us" />
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right animated bounceInDown">
-                                    <a className="dropdown-item" href="#">
-                                        <i className="flag-icon flag-icon-in" /> India
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        <i className="flag-icon flag-icon-fr" /> French
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        <i className="flag-icon flag-icon-cn" /> China
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        <i className="flag-icon flag-icon-de" /> Dutch
-                                    </a>
-                                </div>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src={TEMPLATES_ASSETS+"images/users/1.jpg"} alt="user" className="profile-pic rounded-circle" width={30} />
-                                </a>
-                                <div className="dropdown-menu mailbox dropdown-menu-right animated bounceInDown">
-                                    <ul className="dropdown-user list-style-none">
-                                        <li>
-                                            <div className="dw-user-box p-3 d-flex">
-                                                <div className="u-img">
-                                                    <img src={TEMPLATES_ASSETS+"images/users/1.jpg"} alt="user" className="rounded" width={80} />
-                                                </div>
-                                                <div className="u-text ml-2">
-                                                    <h4 className="mb-0">Steave Jobs</h4>
-                                                    <p className="text-muted mb-1 font-14">varun@gmail.com</p>
-                                                    <a href="pages-profile.html" className="btn btn-rounded btn-danger btn-sm text-white d-inline-block">View
-                                    Profile</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li role="separator" className="dropdown-divider" />
-                                        <li className="user-list">
-                                            <a className="px-3 py-2" href="#">
-                                                <i className="ti-user" /> My Profile
-                                            </a>
-                                        </li>
-                                        <li className="user-list">
-                                            <a className="px-3 py-2" href="#">
-                                                <i className="ti-wallet" /> My Balance
-                                            </a>
-                                        </li>
-                                        <li className="user-list">
-                                            <a className="px-3 py-2" href="#">
-                                                <i className="ti-email" /> Inbox
-                                            </a>
-                                        </li>
-                                        <li role="separator" className="dropdown-divider" />
-                                        <li className="user-list">
-                                            <a className="px-3 py-2" href="#">
-                                                <i className="ti-settings" /> Account Setting
-                                            </a>
-                                        </li>
-                                        <li role="separator" className="dropdown-divider" />
-                                        <li className="user-list">
-                                            <a className="px-3 py-2" href="#">
-                                                <i className="fa fa-power-off" /> Logout
-                                            </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                         </ul>
+                        :null}
                     </div>
                 </nav>
             </header>
