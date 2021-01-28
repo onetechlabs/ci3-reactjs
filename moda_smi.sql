@@ -41,7 +41,7 @@ CREATE TABLE `variables` (
 
 INSERT INTO `variables` (`id_variables`, `variable_description`, `variable_key`, `variable_value`) VALUES
 (1, 'Base URL Projects', 'baseUrl', 'http://localhost:8080/'),
-(2, 'Config JSON for Firebase', 'firebaseConfig', '{\"apiKey\": \"AIzaSyBjoZcWALEFrYre7Rhyf-SUij4CHDZdLPc\",\"authDomain\": \"active-cable-292807.firebaseapp.com\",\"databaseURL\": \"https://active-cable-292807.firebaseio.com\",\"projectId\": \"active-cable-292807\",\"storageBucket\": \"active-cable-292807.appspot.com\",\"messagingSenderId\": \"652427792787\",\"appId\": \"1:652427792787:web:4201de95b59aebbf0e1866\",\"measurementId\": \"G-VSP8BR8993\"}'),
+(2, 'Config JSON for Firebase', 'firebaseConfig', '{\"apiKey\": \"AIzaSyBjoZcWALEFrYre7Rhyf-SUij4CHDZdLPXXXXXXc\",\"authDomain\": \"active-cable-2928071212.firebaseapp.com\",\"databaseURL\": \"https://active-cable-292807.firebaseio.com\",\"projectId\": \"active-cable-292807\",\"storageBucket\": \"active-cable-292807.appspot.com\",\"messagingSenderId\": \"652427792787\",\"appId\": \"1:652427792787:web:4201de95b59aebbf0e1866\",\"measurementId\": \"G-VSP8BR8993\"}'),
 (3, 'firebaseURL Rest API', 'firebaseRestAPI_URL', 'https://firestore.googleapis.com/v1/projects/active-cable-292807/');
 
 --
