@@ -9,20 +9,21 @@ Clone the repository and run the command below to install node dependencies.
 ```sh
 npm install or yarn install
 ```
-and then do this command :
-
-```sh
-yarn run dev
-```
-and new command do this : 
-```sh
-php -S localhost:8000
-```
 
 ## Usage
 
 ```sh
 yarn or npm run [command]
+```
+
+Example :
+
+```sh
+yarn run dev
+```
+And then do this command to start php server: 
+```sh
+php -S localhost:8000
 ```
 
 | Command          | Description                                       |
