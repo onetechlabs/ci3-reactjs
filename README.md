@@ -9,20 +9,15 @@ Clone the repository and run the command below to install node dependencies.
 ```sh
 npm install or yarn install
 ```
-
-After that, configure the project to use with XAMPP or Docker.
-
-## Docker
-
-Make sure that you have Docker and Docker Compose installed in your machine and then run:
+and then do this command :
 
 ```sh
-docker-compose up
+yarn run dev
 ```
-
-After that, check the project up and running: http://localhost:8080
-
-If you want to change Docker port, go to the "src/util" folder and modify the constants.js file.
+and new command do this : 
+```sh
+php -S localhost:8000
+```
 
 ## Usage
 
@@ -48,9 +43,9 @@ If is not clear yet, check the "util_helper" for more info.
 
 The project have been tested using the versions below:
 
-- XAMPP Stack / Docker with PHP version 7.4.7
-- Node version 12.17
-- Yarn version 1.22.4
+- PHP version 7.4.12
+- Node version v12.18.3
+- Yarn version 1.22.5
 
 ## Contributing
 
