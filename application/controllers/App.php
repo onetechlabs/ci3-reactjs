@@ -6,9 +6,13 @@ class App extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		//Load Libraries
 		$this->load->library('session');
+		//Load Helpers
 		$this->load->helper('url');
 		$this->load->helper('util');
+		//Load Models
+		$this->load->model('AppModel');
 	}
 
 
@@ -33,15 +37,34 @@ class App extends CI_Controller {
 		// for more information about this function, check the util_helper;
 		load_js(["app"], "js_assets");
 
-		$this->load->view('login');
+		$headerWeb			=	$this->AppModel->loginHeader();
+		$jsNonReactJsWeb	=	$this->AppModel->loginJs();
+		$cssWeb				=	$this->AppModel->loginCss();
+		$dataTemplates		= 	array(
+									"headerWeb"=>$headerWeb,
+									"jsNonReactJsWeb"=>$jsNonReactJsWeb,
+									"cssWeb"=>$cssWeb
+								);
+
+		$this->load->view('login',$dataTemplates);
 	}
 
 	public function dashboard()
 	{
+
 		// loading the script/css only in this page
-		// for more information about this function, check the util_helper	
+		// for more information about this function, check the util_helper;
 		load_js(["app"], "js_assets");
 
-		$this->load->view('dashboard');
+		$headerWeb			=	$this->AppModel->dashboardHeader();
+		$jsNonReactJsWeb	=	$this->AppModel->dashboardJs();
+		$cssWeb				=	$this->AppModel->dashboardCss();
+		$dataTemplates		= 	array(
+									"headerWeb"=>$headerWeb,
+									"jsNonReactJsWeb"=>$jsNonReactJsWeb,
+									"cssWeb"=>$cssWeb
+								);
+
+		$this->load->view('dashboard',$dataTemplates);
 	}
 }
